@@ -19,6 +19,9 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Uses WiFi to connect and sync with nearby devices</string>
 	<key>NSBonjourServices</key>
+	<array>
+		<string>NSBonjourServices text</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>ditto_demo</string>
 	<key>CFBundlePackageType</key>
