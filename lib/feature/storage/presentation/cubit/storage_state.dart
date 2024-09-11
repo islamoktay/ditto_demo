@@ -6,7 +6,7 @@ sealed class StorageState {}
 final class StorageData extends StorageState {
   StorageData({required this.meals});
 
-  final List<Meal> meals;
+  final Map<String,int> meals;
 }
 
 final class StorageLoading extends StorageState {}

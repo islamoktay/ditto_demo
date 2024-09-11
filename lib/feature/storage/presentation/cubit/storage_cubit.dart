@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ditto_demo/feature/storage/domain/entity/meal.dart';
 import 'package:ditto_demo/feature/storage/domain/repo/i_storage_repo.dart';
 import 'package:ditto_demo/feature/storage/domain/usecase/add_meal_to_storage_usecase.dart';
 
@@ -35,7 +34,18 @@ class StorageCubit extends Cubit<StorageState> {
     await _storageRepo.listenMeals();
     _storageRepo.stream.stream.listen(
       (event) {
-        if (!isClosed) emit(StorageData(meals: event));
+        final map = <String, int>{};
+        for (var i = 0; i < event.length; i++) {
+          final hasElement = map.keys.contains(event[i].name);
+          if (hasElement) {
+            final count = (map[event[i].name] ?? 0) + 1;
+            map[event[i].name] = count;
+          } else {
+            map.putIfAbsent(event[i].name, () => 1);
+          }
+        }
+
+        if (!isClosed) emit(StorageData(meals: map));
       },
     );
   }

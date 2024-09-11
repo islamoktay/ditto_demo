@@ -2,6 +2,7 @@ import 'package:ditto_live/ditto_live.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'package:ditto_demo/core/blocs/user_cubit/user_cubit.dart';
 import 'package:ditto_demo/core/services/navigation_service/navigation_service.dart';
 
 final GetIt sl = GetIt.instance;
@@ -10,6 +11,7 @@ Future<void> init() async {
   final ditto = await _dittoInit();
   sl
     ..registerSingleton<Ditto>(ditto)
+    ..registerSingleton<UserCubit>(UserCubit())
     ..registerFactory<NavigationService>(NavigationService.new);
 }
 

@@ -15,13 +15,13 @@ class StorageList extends StatelessWidget {
       builder: (context, state) {
         switch (state) {
           case StorageData():
-            
             return ListView.separated(
               itemCount: state.meals.length,
               padding: const EdgeInsets.all(16),
               separatorBuilder: (context, index) => const SizedBox(height: 16),
               itemBuilder: (context, index) => Text(
-                state.meals[index].name,
+                '${state.meals.keys.toList()[index]} '
+                '(${state.meals.values.map((e) => e.toString()).toList()[index]})',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             );
