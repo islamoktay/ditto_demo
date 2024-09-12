@@ -2,23 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ditto_demo/feature/storage/data/repo/storage_repo.dart';
-import 'package:ditto_demo/feature/storage/domain/usecase/add_meal_to_storage_usecase.dart';
-import 'package:ditto_demo/feature/storage/presentation/cubit/storage_cubit.dart';
+import 'package:ditto_demo/core/di/di.dart';
+import 'package:ditto_demo/feature/db_meal/presentation/cubit/meal_cubit.dart';
 import 'package:ditto_demo/feature/storage/presentation/widget/add_item_fab.dart';
 import 'package:ditto_demo/feature/storage/presentation/widget/storage_list.dart';
 
 class StorageView extends StatelessWidget {
-  StorageView({super.key});
+  const StorageView({super.key});
 
-  final repo = StorageRepo();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<StorageCubit>(
-      create: (_) => StorageCubit(
-        AddMealToStorageUsecase(repo),
-        repo,
-      )..listenStorageMeals(),
+    return BlocProvider.value(
+      value: sl<MealCubit>(),
       child: Scaffold(
         floatingActionButton: const AddItemFAB(),
         appBar: AppBar(title: const Text('Storage')),

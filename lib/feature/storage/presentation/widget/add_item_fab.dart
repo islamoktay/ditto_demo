@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'package:ditto_demo/feature/storage/presentation/cubit/storage_cubit.dart';
+import 'package:ditto_demo/core/di/di.dart';
+import 'package:ditto_demo/feature/db_meal/presentation/cubit/meal_cubit.dart';
 
 class AddItemFAB extends StatelessWidget {
   const AddItemFAB({super.key});
@@ -15,10 +16,7 @@ class AddItemFAB extends StatelessWidget {
       onPressed: () {
         showModalBottomSheet<void>(
           context: context,
-          builder: (_) => BlocProvider.value(
-            value: context.watch<StorageCubit>(),
-            child: const _AddItemBottomSheet(),
-          ),
+          builder: (_) => const _AddItemBottomSheet(),
         );
       },
     );
@@ -37,18 +35,21 @@ class _AddItemBottomSheet extends HookWidget {
         children: [
           TextFormField(controller: name),
           const SizedBox(height: 16),
-          BlocBuilder<StorageCubit, StorageState>(
-            builder: (context, state) {
-              return ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  context
-                      .read<StorageCubit>()
-                      .addMealToStorageUsecase(name.text);
-                },
-                child: const Text('Add'),
-              );
-            },
+          BlocProvider.value(
+            value: sl<MealCubit>(),
+            child: BlocBuilder<MealCubit, MealState>(
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    context
+                        .read<MealCubit>()
+                        .addMealToStorageUsecase(name.text);
+                  },
+                  child: const Text('Add'),
+                );
+              },
+            ),
           ),
         ],
       ),

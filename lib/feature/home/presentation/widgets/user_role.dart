@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ditto_demo/core/blocs/user_cubit/user_cubit.dart';
 import 'package:ditto_demo/core/di/di.dart';
 import 'package:ditto_demo/core/enum/user_role_enum.dart';
+import 'package:ditto_demo/feature/db_meal/domain/repo/i_meal_db_repo.dart';
+import 'package:ditto_demo/feature/db_seats/domain/repo/i_seat_db_repo.dart';
 
 class UserRole extends StatelessWidget {
   const UserRole({
@@ -13,12 +15,20 @@ class UserRole extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        RoleTextButton(userRoleEnum: UserRoleEnum.chief),
-        SizedBox(width: 16),
-        RoleTextButton(userRoleEnum: UserRoleEnum.crew),
+        const RoleTextButton(userRoleEnum: UserRoleEnum.chief),
+        const SizedBox(width: 16),
+        const RoleTextButton(userRoleEnum: UserRoleEnum.crew),
+        const SizedBox(width: 16),
+        ElevatedButton(
+          onPressed: () {
+            sl<ISeatDBRepo>().clearDB();
+            sl<IMealDBRepo>().clearDB();
+          },
+          child: const Text('Clear DB'),
+        ),
       ],
     );
   }
