@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:ditto_live/ditto_live.dart';
 
@@ -17,14 +18,19 @@ class MealDbRepo implements IMealDBRepo {
 
   @override
   Future<void> addMealItemToStorage(Meal meal) async {
-    await sl<Ditto>().store.execute(
-      'INSERT INTO meals DOCUMENTS (:meal)',
-      arguments: {'meal': MealItem.fromEntity(meal).toMap()},
-    );
+    try {
+      await sl<Ditto>().store.execute(
+        'INSERT INTO meals DOCUMENTS (:meal)',
+        arguments: {'meal': MealItem.fromEntity(meal).toMap()},
+      );
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   @override
   Future<void> listenMeals() async {
+    await sl<Ditto>().sync.registerSubscription('SELECT * FROM meals');
     final result = await sl<Ditto>().store.execute('SELECT * FROM meals');
 
     final meals =

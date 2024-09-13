@@ -21,10 +21,13 @@ class SeatDBRepo implements ISeatDBRepo {
       'INSERT INTO seats DOCUMENTS (:seat)',
       arguments: {'seat': SeatItem.fromEntity(seat).toMap()},
     );
+    await sl<Ditto>().sync.registerSubscription('SELECT * FROM seats');
   }
 
   @override
   Future<void> listenSeats() async {
+    await sl<Ditto>().sync.registerSubscription('SELECT * FROM seats');
+
     final result = await sl<Ditto>().store.execute('SELECT * FROM seats');
 
     final meals =

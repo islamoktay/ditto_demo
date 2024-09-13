@@ -23,6 +23,17 @@ class ChooseMealDialog extends HookWidget {
         builder: (context, state) {
           switch (state) {
             case MealData():
+              if (state.storageFrozenMeals.isEmpty) {
+                return AlertDialog(
+                  title: const Text('No frozen meal remained!'),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              }
               return Dialog(
                 child: Padding(
                   padding: const EdgeInsets.all(32),

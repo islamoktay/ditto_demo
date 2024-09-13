@@ -15,6 +15,7 @@ class StorageView extends StatelessWidget {
     return BlocProvider.value(
       value: sl<MealCubit>(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         floatingActionButton: const AddItemFAB(),
         appBar: AppBar(title: const Text('Storage')),
         body: const StorageList(),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ditto_live/ditto_live.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path_provider/path_provider.dart';
@@ -49,13 +51,23 @@ Future<void> init() async {
 
 Future<Ditto> _dittoInit() async {
   final identity = await OnlinePlaygroundIdentity.create(
-    appID: '073b0f2b-3b0d-4a37-bccb-98e0434bb6be',
-    token: 'b9d7fa9a-7999-46b2-a2dd-f1eecac613cd',
+    appID: '',
+    token: '',
   );
-  final dir = await getApplicationDocumentsDirectory();
+
+  final dataDir = await getApplicationDocumentsDirectory();
+  final persistenceDirectory = Directory('${dataDir.path}/ditto');
+  await persistenceDirectory.create(recursive: true);
+
   final ditto = await Ditto.open(
     identity: identity,
-    persistenceDirectory: dir,
+    persistenceDirectory: persistenceDirectory,
+  );
+
+  await ditto.setTransportConfig(
+    TransportConfig(
+      peerToPeer: PeerToPeer.all(),
+    ),
   );
 
   await ditto.startSync();
