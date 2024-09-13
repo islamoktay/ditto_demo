@@ -13,21 +13,25 @@ class UserRole extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const RoleTextButton(userRoleEnum: UserRoleEnum.chief),
-        const SizedBox(width: 16),
-        const RoleTextButton(userRoleEnum: UserRoleEnum.crew),
-        const SizedBox(width: 16),
-        ElevatedButton(
-          onPressed: () {
-            sl<ISeatDBRepo>().clearDB();
-            sl<IMealDBRepo>().clearDB();
-          },
-          child: const Text('Clear DB'),
-        ),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const RoleTextButton(userRoleEnum: UserRoleEnum.chief),
+          const SizedBox(width: 16),
+          const RoleTextButton(userRoleEnum: UserRoleEnum.crew),
+          const SizedBox(width: 16),
+          ElevatedButton(
+            onPressed: () {
+              sl<ISeatDBRepo>().clearDB();
+              sl<IMealDBRepo>().clearDB();
+            },
+            child: const Text('Clear DB'),
+          ),
+        ],
+      ),
     );
   }
 }
