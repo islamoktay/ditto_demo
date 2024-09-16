@@ -50,9 +50,12 @@ Future<void> init() async {
 }
 
 Future<Ditto> _dittoInit() async {
+  const appID = String.fromEnvironment('APPID');
+  const token = String.fromEnvironment('TOKEN');
+
   final identity = await OnlinePlaygroundIdentity.create(
-    appID: '',
-    token: '',
+    appID: appID,
+    token: token,
   );
 
   final dataDir = await getApplicationDocumentsDirectory();

@@ -1,4 +1,3 @@
-
 import 'package:ditto_demo/feature/db_meal/domain/entity/meal.dart';
 
 class MealItem {

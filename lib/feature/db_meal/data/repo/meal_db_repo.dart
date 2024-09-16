@@ -31,6 +31,7 @@ class MealDbRepo implements IMealDBRepo {
   @override
   Future<void> listenMeals() async {
     await sl<Ditto>().sync.registerSubscription('SELECT * FROM meals');
+
     final result = await sl<Ditto>().store.execute('SELECT * FROM meals');
 
     final meals =
@@ -43,6 +44,7 @@ class MealDbRepo implements IMealDBRepo {
       onChange: (val) {
         final list =
             val.items.map((e) => MealItem.fromMap(e.value).toEntity()).toList();
+
         stream.add(list);
       },
     );
