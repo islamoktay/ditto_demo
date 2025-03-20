@@ -13,7 +13,9 @@ class ChooseMealDialog extends HookWidget {
     required this.seatNumber,
     super.key,
   });
+
   final int seatNumber;
+
   @override
   Widget build(BuildContext context) {
     final chosenMenu = useState('');
@@ -64,13 +66,13 @@ class ChooseMealDialog extends HookWidget {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            context.read<SeatCubit>().takeOrder(
-                                  Seat(
-                                    meal: chosenMenu.value,
-                                    seatNumber: seatNumber,
-                                    id: null,
-                                  ),
-                                );
+                            sl<SeatCubit>().takeOrder(
+                              Seat(
+                                meal: chosenMenu.value,
+                                seatNumber: seatNumber,
+                                id: null,
+                              ),
+                            );
                             Navigator.of(context).pop();
                           },
                           child: const Text('Take Order'),

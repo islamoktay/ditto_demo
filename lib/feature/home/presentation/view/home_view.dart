@@ -1,6 +1,7 @@
 import 'package:ditto_demo/feature/flight_list/domain/entity/flight.dart';
 import 'package:ditto_demo/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:ditto_demo/feature/home/presentation/cubit/home_state.dart';
+import 'package:ditto_demo/feature/home/presentation/widgets/connected_devices.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,6 +104,10 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
         ),
+        const SizedBox(
+          height: 250,
+          child: ConnectedDevices(),
+        )
       ],
     );
   }

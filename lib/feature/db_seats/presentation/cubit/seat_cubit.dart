@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ditto_demo/feature/db_meal/domain/entity/update_meal_request.dart';
@@ -8,8 +6,6 @@ import 'package:ditto_demo/feature/db_seats/domain/entity/seat.dart';
 import 'package:ditto_demo/feature/db_seats/domain/usecase/get_seat_stream_usecase.dart';
 import 'package:ditto_demo/feature/db_seats/domain/usecase/listen_seats_usecase.dart';
 import 'package:ditto_demo/feature/db_seats/domain/usecase/take_order_usecase.dart';
-
-
 
 class SeatCubit extends Cubit<List<Seat>> {
   SeatCubit(

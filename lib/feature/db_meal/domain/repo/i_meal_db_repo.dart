@@ -6,6 +6,7 @@ import 'package:ditto_demo/feature/db_meal/domain/entity/update_meal_request.dar
 abstract class IMealDBRepo {
   late final StreamController<List<Meal>> stream;
   Future<void> addMealItemToStorage(Meal meal);
+  Future<void> removeMealItemFromStorage(String mealName);
   Future<void> listenMeals();
   Future<void> updateMealFromOrder(UpdateMealRequest updateMealReq);
   Future<void> clearDB();

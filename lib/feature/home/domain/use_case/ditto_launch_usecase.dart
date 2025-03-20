@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:ditto_demo/core/di/di.dart';
 import 'package:ditto_demo/core/usecase/i_usecase.dart';
 import 'package:ditto_demo/feature/flight_list/domain/entity/flight.dart';
+import 'package:ditto_demo/feature/home/presentation/cubit/connected_devices_cubit.dart';
 import 'package:ditto_live/ditto_live.dart';
-import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DittoLaunchUsecase extends Usecase<void, Flight> {
@@ -36,9 +36,13 @@ class DittoLaunchUsecase extends Usecase<void, Flight> {
       ..startSync();
 
     ditto.presence.observe((graph) {
-      if (kDebugMode) {
-        print(graph.remotePeers.map((peer) => peer.deviceName).join(', '));
-      }
+      sl<ConnectedDevicesCubit>().broadcast(
+        graph.remotePeers.map(
+          (peer) {
+            return peer.deviceName;
+          },
+        ).toList(),
+      );
     });
 
     sl.registerSingleton<Ditto>(ditto);

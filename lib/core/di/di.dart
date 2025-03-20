@@ -1,5 +1,6 @@
 import 'package:ditto_demo/feature/flight_list/presentation/cubit/flight_list_cubit.dart';
 import 'package:ditto_demo/feature/home/domain/use_case/ditto_launch_usecase.dart';
+import 'package:ditto_demo/feature/home/presentation/cubit/connected_devices_cubit.dart';
 import 'package:ditto_demo/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -44,8 +45,9 @@ Future<void> init() async {
     )
     ..registerSingleton<UserCubit>(UserCubit())
     ..registerSingleton<HomeCubit>(
-      HomeCubit(DittoLaunchUsecase(), sl()),
+      HomeCubit(DittoLaunchUsecase(), sl(), sl()),
     )
     ..registerSingleton<FlightListCubit>(FlightListCubit())
+    ..registerSingleton<ConnectedDevicesCubit>(ConnectedDevicesCubit())
     ..registerFactory<NavigationService>(NavigationService.new);
 }

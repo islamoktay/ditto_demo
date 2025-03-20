@@ -29,6 +29,23 @@ class MealDbRepo implements IMealDBRepo {
   }
 
   @override
+  Future<void> removeMealItemFromStorage(String mealName) async {
+    try {
+      final results = await sl<Ditto>().store.execute(
+            "SELECT * FROM meals WHERE name = '$mealName'",
+          );
+
+      if (results.items.isNotEmpty) {
+        await sl<Ditto>().store.execute(
+              "EVICT FROM meals WHERE _id = '${results.items.first.value["_id"]}'",
+            );
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  @override
   Future<void> listenMeals() async {
     sl<Ditto>().sync.registerSubscription('SELECT * FROM meals');
 

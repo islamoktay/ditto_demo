@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +29,9 @@ class _AddItemDialog extends HookWidget {
   const _AddItemDialog();
   @override
   Widget build(BuildContext context) {
-    final name = useTextEditingController();
+    final name =
+        useTextEditingController(text: 'Meal ${Random().nextInt(9999)}');
+
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(32),
