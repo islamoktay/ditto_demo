@@ -6,4 +6,13 @@ class UserCubit extends Cubit<UserRoleEnum> {
   UserCubit() : super(UserRoleEnum.crew);
 
   void changeUserRole(UserRoleEnum userRole) => emit(userRole);
+
+  String _username = '';
+
+  String get username => _username;
+
+  Future<bool> login(String username) async {
+    _username = username;
+    return true;
+  }
 }

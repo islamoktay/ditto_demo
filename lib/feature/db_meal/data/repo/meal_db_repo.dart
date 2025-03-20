@@ -30,7 +30,7 @@ class MealDbRepo implements IMealDBRepo {
 
   @override
   Future<void> listenMeals() async {
-    await sl<Ditto>().sync.registerSubscription('SELECT * FROM meals');
+    sl<Ditto>().sync.registerSubscription('SELECT * FROM meals');
 
     final result = await sl<Ditto>().store.execute('SELECT * FROM meals');
 
@@ -39,7 +39,7 @@ class MealDbRepo implements IMealDBRepo {
 
     stream.add(meals);
 
-    await sl<Ditto>().store.registerObserver(
+    sl<Ditto>().store.registerObserver(
       'SELECT * FROM meals',
       onChange: (val) {
         final list =

@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.6
-  ditto_live: ^4.8.0-beta.9
+  ditto_live: ^4.10.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
@@ -21,6 +21,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mocktail: ^1.0.0
+  uuid: any
   very_good_analysis: ^5.1.0
 
 flutter:

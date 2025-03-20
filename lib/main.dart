@@ -1,3 +1,4 @@
+import 'package:ditto_demo/feature/login/presentation/view/login_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,9 +7,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ditto_demo/core/blocs/user_cubit/user_cubit.dart';
 import 'package:ditto_demo/core/di/di.dart';
 import 'package:ditto_demo/core/di/di.dart' as di;
-import 'package:ditto_demo/feature/home/presentation/view/home_view.dart';
-import 'package:ditto_demo/feature/db_meal/presentation/cubit/meal_cubit.dart';
-import 'package:ditto_demo/feature/db_seats/presentation/cubit/seat_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +30,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: sl<UserCubit>()),
-        BlocProvider.value(value: sl<MealCubit>()..listenStorageMeals()),
-        BlocProvider.value(value: sl<SeatCubit>()..listenSeats()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -42,7 +38,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
           useMaterial3: true,
         ),
-        home: const HomeView(),
+        home: const LoginView(),
       ),
     );
   }

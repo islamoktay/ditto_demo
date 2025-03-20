@@ -1,8 +1,7 @@
-import 'dart:io';
-
-import 'package:ditto_live/ditto_live.dart';
+import 'package:ditto_demo/feature/flight_list/presentation/cubit/flight_list_cubit.dart';
+import 'package:ditto_demo/feature/home/domain/use_case/ditto_launch_usecase.dart';
+import 'package:ditto_demo/feature/home/presentation/cubit/home_cubit.dart';
 import 'package:get_it/get_it.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'package:ditto_demo/core/blocs/user_cubit/user_cubit.dart';
 import 'package:ditto_demo/core/services/navigation_service/navigation_service.dart';
@@ -24,9 +23,7 @@ import 'package:ditto_demo/feature/db_seats/presentation/cubit/seat_cubit.dart';
 final GetIt sl = GetIt.instance;
 
 Future<void> init() async {
-  final ditto = await _dittoInit();
   sl
-    ..registerSingleton<Ditto>(ditto)
     ..registerSingleton<IMealDBRepo>(MealDbRepo())
     ..registerSingleton<ISeatDBRepo>(SeatDBRepo())
     ..registerSingleton<MealCubit>(
@@ -46,34 +43,9 @@ Future<void> init() async {
       ),
     )
     ..registerSingleton<UserCubit>(UserCubit())
+    ..registerSingleton<HomeCubit>(
+      HomeCubit(DittoLaunchUsecase(), sl()),
+    )
+    ..registerSingleton<FlightListCubit>(FlightListCubit())
     ..registerFactory<NavigationService>(NavigationService.new);
-}
-
-Future<Ditto> _dittoInit() async {
-  const appID = String.fromEnvironment('APPID');
-  const token = String.fromEnvironment('TOKEN');
-
-  final identity = await OnlinePlaygroundIdentity.create(
-    appID: appID,
-    token: token,
-  );
-
-  final dataDir = await getApplicationDocumentsDirectory();
-  final persistenceDirectory = Directory('${dataDir.path}/ditto');
-  await persistenceDirectory.create(recursive: true);
-
-  final ditto = await Ditto.open(
-    identity: identity,
-    persistenceDirectory: persistenceDirectory,
-  );
-
-  await ditto.setTransportConfig(
-    TransportConfig(
-      peerToPeer: PeerToPeer.all(),
-    ),
-  );
-
-  await ditto.startSync();
-
-  return ditto;
 }
