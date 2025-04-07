@@ -70,6 +70,12 @@
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "--dart-define=APPID=2562169d-bb1a-4155-81d1-6fc89c2d6777 --dart-define=TOKEN=o2d1c2VyX2lkeBg2N2Q5MjAyNTRlOWUwYzcyMmUxOGQ4N2VmZXhwaXJ5eBgyMDI1LTA0LTE4VDIyOjU5OjU5Ljk5OVppc2lnbmF0dXJleFhKdHR3aWVKODBySEkrTytCYW5QTDVocC9jcC9WZWtHY0xpTDJmNVg5SFR0dmRQMVh2OXYwbi8wdDFsc0V2c1VFNUlUWkNvaHZCcTV0UjhBTytoeWVWdz09 --dart-define=SHAREDKEY=MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg3gzYECbq9fuo3KaLBMTlZNFcna3Yt9zYpOYNaxyZo7GhRANCAAREgd9avGsT392eNkzC2LW0dfRJKpFPoP89kJCbqnqfdrFqkq1vDxfhedyFMOSP+VVD4FVbmqtnSnoat6Isq9Kb"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "IDEPreferLogStreaming"
