@@ -107,7 +107,7 @@ class _HomeViewState extends State<HomeView> {
         const SizedBox(
           height: 250,
           child: ConnectedDevices(),
-        )
+        ),
       ],
     );
   }

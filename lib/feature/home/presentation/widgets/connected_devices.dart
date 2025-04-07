@@ -15,7 +15,7 @@ class ConnectedDevices extends StatelessWidget {
           return Row(
             children: [
               const Text('Connected Devices:'),
-              ...list.map((device) => Text('* $device'))
+              ...list.map((device) => Text('* $device')),
             ],
           );
         },

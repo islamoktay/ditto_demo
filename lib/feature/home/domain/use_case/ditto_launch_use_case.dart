@@ -16,7 +16,7 @@ class DittoLaunchUseCase extends Usecase<void, Flight> {
     if (!sl.isRegistered<Ditto>()) {
       const appID = 'demo';
       const token = String.fromEnvironment('TOKEN');
-      const sharedKey = String.fromEnvironment("SHAREDKEY");
+      const sharedKey = String.fromEnvironment('SHAREDKEY');
 
       await Ditto.init();
 

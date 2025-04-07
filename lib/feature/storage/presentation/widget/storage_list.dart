@@ -70,7 +70,7 @@ class _MealList extends StatelessWidget {
                 await sl<IMealDBRepo>()
                     .removeMealItemFromStorage(meals.keys.toList()[index]);
               },
-            )
+            ),
           ],
         ),
       ),
