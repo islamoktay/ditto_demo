@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:ditto_demo/core/blocs/user_cubit/user_cubit.dart';
+import 'package:ditto_demo/core/consts.dart';
 import 'package:ditto_demo/core/di/di.dart';
 import 'package:ditto_demo/core/usecase/i_usecase.dart';
 import 'package:ditto_demo/feature/flight_list/domain/entity/flight.dart';
@@ -15,8 +16,6 @@ class DittoLaunchUseCase extends Usecase<void, Flight> {
   FutureOr<void> call(Flight params) async {
     if (!sl.isRegistered<Ditto>()) {
       const appID = 'demo';
-      const token = String.fromEnvironment('TOKEN');
-      const sharedKey = String.fromEnvironment('SHAREDKEY');
 
       await Ditto.init();
 
